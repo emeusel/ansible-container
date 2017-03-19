@@ -1,2 +1,3 @@
 fix-docker-client-error-location.patch
 fix-autoversionclient.patch
+fix-image-usage.patch

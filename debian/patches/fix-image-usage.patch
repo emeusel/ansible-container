@@ -1,0 +1,37 @@
+Index: ansible-container/container/docker/engine.py
+===================================================================
+--- ansible-container.orig/container/docker/engine.py
++++ ansible-container/container/docker/engine.py
+@@ -166,15 +166,15 @@ class Engine(BaseEngine):
+         """
+         client = self.get_client()
+         try:
+-            return client.images(name=name, quiet=True)[0]
+-        except IndexError:
++            return client.images.get(name=name).id
++        except docker_errors.ImageNotFound:
+             raise NameError('No image with the name %s' % name)
+ 
+     def get_images_by_name(self, name):
+         client = self.get_client()
+         try:
+-            return client.images(name=name, quiet=True)
+-        except IndexError:
++            return client.images.get(name=name)
++        except docker_errors.ImageNotFound:
+             raise NameError('No image with the name %s' % name)
+ 
+     def get_container_id_by_name(self, name):
+@@ -624,10 +624,8 @@ class Engine(BaseEngine):
+                               [u'%s %s' % (k, v)
+                                for k, v in image_config.items()]
+                           ))
+-        image_id, = client.images(
+-            '%s-%s:%s' % (self.project_name, host, version),
+-            quiet=True
+-        )
++        image_id = self.get_image_id_by_tag(
++            '%s-%s:%s' % (self.project_name, host, version))
+         logger.info('Exported %s-%s with image ID %s', self.project_name, host,
+                     image_id)
+         client.tag(image_id, '%s-%s' % (self.project_name, host), tag='latest',
