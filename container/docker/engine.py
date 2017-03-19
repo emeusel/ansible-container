@@ -811,7 +811,7 @@ class Engine(BaseEngine):
             # To ensure version compatibility, we have to generate the kwargs ourselves
             client_kwargs = kwargs_from_env(assert_hostname=False)
             timeout = get_timeout()
-            self._client = docker.AutoVersionClient(timeout=timeout, **client_kwargs)
+            self._client = docker.DockerClient(timeout=timeout, version='auto', **client_kwargs)
             self.api_version = self._client.version()['ApiVersion']
             # Set the version in the env so it can be used elsewhere
             os.environ['DOCKER_API_VERSION'] = self.api_version
