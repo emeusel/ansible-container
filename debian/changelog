@@ -1,0 +1,5 @@
+ansible-container (0.3~~pre-0ubuntu0-1) unstable; urgency=medium
+
+  * Initial release
+
+ -- Erik Meusel <em.opensource@gmail.com>  Sun, 19 Mar 2017 21:28:42 +0100
