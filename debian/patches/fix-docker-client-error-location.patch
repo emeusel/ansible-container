@@ -1,0 +1,13 @@
+Index: ansible-container/container/docker/engine.py
+===================================================================
+--- ansible-container.orig/container/docker/engine.py
++++ ansible-container/container/docker/engine.py
+@@ -14,7 +14,7 @@ import base64
+ import pprint
+ 
+ import docker
+-from docker.client import errors as docker_errors
++from docker import errors as docker_errors
+ from docker.utils import kwargs_from_env
+ from docker.constants import DEFAULT_TIMEOUT_SECONDS
+ 
