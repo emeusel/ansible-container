@@ -34,6 +34,9 @@ class MakeTempDir(object):
         return os.path.realpath(self.temp_dir)
 
     def __exit__(self, exc_type, exc_val, exc_tb):
+        if exc_type is not None and logger.getEffectiveLevel() == logging.DEBUG:
+            logger.debug('Preventing clean up of temporary directory %r.', self.temp_dir)
+            return
         try:
             logger.debug('Cleaning up temporary directory %s...', self.temp_dir)
             shutil.rmtree(self.temp_dir)

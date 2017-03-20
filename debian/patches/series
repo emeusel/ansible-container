@@ -1,3 +1,4 @@
 fix-docker-client-error-location.patch
 fix-autoversionclient.patch
 fix-image-usage.patch
+prevent-cleanup-in-debug-mode.patch
